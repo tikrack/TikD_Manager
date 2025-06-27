@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
-use Native\Laravel\Facades\Window;
 use Native\Laravel\Contracts\ProvidesPhpIni;
+use Native\Laravel\Facades\MenuBar;
+use Native\Laravel\Facades\Notification;
+use Native\Laravel\Facades\Window;
 
 class NativeAppServiceProvider implements ProvidesPhpIni
 {
@@ -13,7 +15,16 @@ class NativeAppServiceProvider implements ProvidesPhpIni
      */
     public function boot(): void
     {
-        Window::open();
+        Window::open()
+            ->minWidth(900)
+            ->minHeight(600)
+            ->title("Internet Download Manager")
+            ->hideDevTools()
+            ->hideMenu(true);
+
+        Notification::title('Hello from NativePHP')
+            ->message('This is a detail message coming from your Laravel app.')
+            ->show();
     }
 
     /**
@@ -21,7 +32,6 @@ class NativeAppServiceProvider implements ProvidesPhpIni
      */
     public function phpIni(): array
     {
-        return [
-        ];
+        return [];
     }
 }
